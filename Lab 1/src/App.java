@@ -40,11 +40,14 @@ public class App {
         return false;
     }
     /**
-     * This method finds the median of a given int[]. Assumes all int[] arrays passed to the method are odd length. Does not assume int[] arrays are sorted.
+     * This method finds the median of a given int[]. Assumes all int[] arrays passed to the method are odd length. Does not assume int[] arrays are sorted. Sorts the array, then returns the median.
      * @param array int[] array to find median of.
      * @return med median of the array.
      */
     public int median(int[] array) {
+        /**
+         * 
+         */
         int med;
         int[] sortedArray = array;
         for (int i = 0; i < sortedArray.length; i++) {
@@ -56,6 +59,5 @@ public class App {
                 }
             }
         }
-        
-        
+    }
 }
