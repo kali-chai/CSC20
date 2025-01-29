@@ -1,7 +1,17 @@
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
-        System.out.println(new App().contains(new int[] {1, 6, 2, 1, 4, 1, 2, 1, 8}, new int[] {1, 2, 1}));
+        /*
+         * Tests contains with a random array and a2 pattern. Should return true.
+         */
+        int[] a1 = {7, 31, 5, 9, 40, 2, 0, -1, -62, 1, 5};
+        int[] a2 = {5, 9, 10};
+        System.out.println(new App().contains(a1, a2));
+        /*
+         * Tests findMedian with a random array. Should return 5.
+         */
+        int[] array = {8, 1, -40, 7, 22, 12, 90, 11};
+        System.out.println(new App().findMedian(array));
     }
 
     /**
@@ -44,11 +54,10 @@ public class App {
      * @param array int[] array to find median of.
      * @return med median of the array.
      */
-    public int median(int[] array) {
+    public int findMedian(int[] array) {
         /**
-         * 
+         * Sorts the array and returns median (middle of array).
          */
-        int med;
         int[] sortedArray = array;
         for (int i = 0; i < sortedArray.length; i++) {
             for (int j = i + 1; j < sortedArray.length; j++) {
@@ -59,5 +68,6 @@ public class App {
                 }
             }
         }
+        return sortedArray[sortedArray.length / 2];
     }
 }
