@@ -1,21 +1,15 @@
+/**
+ * Stores methods in labs; Contains, findMedian.
+ */
 public class App {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
-        /*
-         * Tests contains with a random array and a2 pattern. Should return true.
-         */
-        int[] a1 = {7, 31, 5, 9, 40, 2, 0, -1, -62, 1, 5};
-        int[] a2 = {5, 9, 10};
-        System.out.println(new App().contains(a1, a2));
-        /*
-         * Tests findMedian with a random array. Should return 5.
-         */
-        int[] array = {8, 1, -40, 7, 22, 12, 90, 11};
-        System.out.println(new App().findMedian(array));
+        Date date = new Date(2, 28);
+        System.out.println(date.toString());
     }
 
     /**
-     * This method returns true if a1 contains a2, and false otherwise.
+     * This method returns true if a1 contains a2, and false otherwise. Lab Name: contains.
      * 
      * @param a1
      * @param a2
@@ -50,7 +44,7 @@ public class App {
         return false;
     }
     /**
-     * This method finds the median of a given int[]. Assumes all int[] arrays passed to the method are odd length. Does not assume int[] arrays are sorted. Sorts the array, then returns the median.
+     * This method finds the median of a given int[]. Assumes all int[] arrays passed to the method are odd length. Does not assume int[] arrays are sorted. Sorts the array, then returns the median. Lab Name: findMedian.
      * @param array int[] array to find median of.
      * @return med median of the array.
      */
@@ -70,4 +64,71 @@ public class App {
         }
         return sortedArray[sortedArray.length / 2];
     }
+}
+/**
+ * Class for Lab 1. Remembers information about a month and day. Ignores leap years, doesn't store years. 
+ * Lab name: Date.
+ */
+class Date {
+    private int month;
+    private int day;
+    public Date(int m, int d) {
+        month = m;
+        day = d;
+    }
+    public int daysInMonth() {
+        if(month == 4 || month == 6 || month == 9 || month == 11) {
+            return 30;
+        } else if(month == 2) {
+            return 28;
+        } else {
+            return 31;
+        }
+    }
+    public int getDay() {
+        return day;
+    }
+    public int getMonth() {
+        return month;
+    }
+    public void nextDay() {
+        day++;
+        if (day > daysInMonth()) {
+            day = 1;
+            month++;
+            if (month > 12) {
+                month = 1;
+            }
+        }
+    }
+    public String toString() {
+        return String.format("%02d/%02d", month, day);
+    }
+}
+class Student {
+    private String name;
+    private int id;
+    private int units = 0;
+    public Student(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getId() {
+        return id;
+    }
+    public void incrementUnits(int units) {
+        this.units += units;
+    }
+    public int getUnits() {
+        return units;
+    }
+    public boolean hasEnoughUnits() {
+        return units >= 180;
+    }
+    public String toString() {
+        return String.format("%1 (%2)", name, id);
+    } 
 }
