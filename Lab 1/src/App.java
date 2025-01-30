@@ -129,6 +129,6 @@ class Student {
         return units >= 180;
     }
     public String toString() {
-        return String.format("%1 (%2)", name, id);
+        return String.format("%1s$ (#%2$s)", name, id);
     } 
 }
