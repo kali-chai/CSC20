@@ -31,7 +31,6 @@ class HotDogStand {
     public String getOwner() {
         return owner;
     }
-
     public String getAddress() {
         return address;
     }
@@ -62,7 +61,6 @@ class HotDogStand {
 
     public String toString() {
         return String.format(
-                "Station Number: %01$8d\nOwner: %2$\nAddress: %3$\nAddress:%4$\nHot Dogs Sold: %5$\nIncome:%6$.2n", this.id,
-                this.owner, this.address, this.countSold, this.soldPrice, this.income());
+                "Station Number: %1$8d\nOwner: %2$\nAddress: %3$\nAddress:%4$\nHot Dogs Sold: %5$\nIncome:%6$.2n", this.id, this.owner, this.address, this.countSold, this.soldPrice, this.income());
     }
 }
