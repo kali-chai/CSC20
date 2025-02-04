@@ -1,23 +1,36 @@
+
+/**
+ * Name: Kali Wilson
+ * Description: This program lets you manage hot dog stands and view their owners, addresses, hot dogs sold, and total profit. You can also change the owner of a stand, and find out how much you make as the manager (30% of the total profit).
+ * Date: 2025/02/04
+ * Self-Grade: 100 points. All names follow convention, code is indented, formatted, and human-readable, comments and JavaDoc included. Program compiles, runs both main methods (MyDriver and YourDriver). with expected output. All requirements in assignment are met. Self grade is included.
+ * Testimony: All the code is written by myself and I have not copied the code from any resources. Kali Wilson
+ */
+
 import java.util.*;
 
 /**
- * Name class. Will be blank.
+ * Name class.
  */
 public class HotDogStandWilson {
-    public static void main(String[] args) throws Exception {
-        HotDogStand test = new HotDogStand(2155911, "Wilson", "123 Main St");
-        System.out.println(test.toString());
-    }
-    // Empty class
+    /**
+     * Empty class.
+     */
 }
 
 /**
- * HotDogStand class, main class in project. Tracks HotDogStand objects with
- * variables id, owner, address, countSold, price, and soldPrice. Has setters,
- * getters, and toString. More hot dogs can be ordered (adds to sales).
+ * HotDogStand class, main class in project. Static variables include TreeMaps
+ * to hold objects and owners to IDs, the price and soldPrice. Tracks
+ * HotDogStand objects with variables id, owner, address, and countSold. Has
+ * setters, getters, and toString. More hot dogs can be ordered (adds to sales).
  */
 class HotDogStand {
 
+    /**
+     * Static variables. TreeMap used to store all stands.
+     */
+    public static TreeMap<Integer, String> allStandOwners = new TreeMap<Integer, String>();
+    public static TreeMap<Integer, HotDogStand> allStands = new TreeMap<Integer, HotDogStand>();
     public static int price = 10;
     public static int soldPrice = 12;
     /**
@@ -41,6 +54,8 @@ class HotDogStand {
         this.owner = owner;
         this.address = address;
         this.countSold = 0;
+        allStandOwners.put(id, owner);
+        allStands.put(id, this);
     }
 
     /**
@@ -66,6 +81,7 @@ class HotDogStand {
 
     public void setOwner(String owner) {
         this.owner = owner;
+        allStandOwners.put(null, owner);
     }
 
     public void order(int count) {
@@ -92,6 +108,36 @@ class HotDogStand {
         return String.format(
                 "Station Number: %08d\nOwner: %s\nAddress: %s\nHot Dogs Sold: %d\nIncome: %.2f\n%s\n",
                 this.id, this.owner, this.address, this.countSold, this.income(), "_".repeat(47));
+    }
+
+    /**
+     * search method. Returns all stands owned by a given owner.
+     * 
+     * @param owner
+     * @return formatted string of all stands owned by given owner.
+     */
+    public String search(String owner) {
+        String result = String.format("Hot dog stands owned by %1$s:\n", owner);
+        for (Map.Entry<Integer, String> entry : allStandOwners.entrySet()) {
+            if (entry.getValue().equals(owner)) {
+                result += String.format("ID: %1$d\n", entry.getKey());
+            }
+        }
+        return result + String.format("%s\n", "_".repeat(47));
+    }
+
+    /**
+     * yourProfit method. Any good entrepreneur needs to mke a profit. Returns 30%
+     * of the total profit between all of the stands, and gives it to you!
+     * 
+     * @return
+     */
+    public static double yourProfit() {
+        double totalProfit = 0.0;
+        for (Map.Entry<Integer, HotDogStand> entry : allStands.entrySet()) {
+            totalProfit += entry.getValue().income() * 0.3;
+        }
+        return totalProfit;
     }
 }
 
@@ -150,12 +196,22 @@ class YourDriver {
         System.out.println(stand3.toString());
         System.out.println(String.format("Total hotdogs sold: %d\n%s", totalSold, "_".repeat(47)));
         System.out.println(String.format("Total income: %.2f\n%s", totalIncome, "_".repeat(47)));
+
+        /**
+         * Searches for all stands owned by Wilson, prints. Finds your profit sa the
+         * manager, prints.
+         */
+        System.out.println(stand1.search("Wilson"));
+        System.out.println(String.format("Your profit: %.2f\n%s", HotDogStand.yourProfit(), "_".repeat(47)));
+
+        System.out.println("Format strings and maps are awesome, why didn't I learn this sooner?");
     }
 }
 
 /**
  * MyDriver class. Contains test scripts pre-written by instructor.
  */
+@SuppressWarnings("all")
 class MyDriver {
     public static void main(String[] args) {
         Random rand = new Random();

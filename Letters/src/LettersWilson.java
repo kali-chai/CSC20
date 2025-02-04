@@ -18,7 +18,6 @@
       */
  }
  
- @SuppressWarnings("unused")
  class Letters {
  
      public static void main(String[] args) {
