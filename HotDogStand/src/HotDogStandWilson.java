@@ -61,6 +61,6 @@ class HotDogStand {
 
     public String toString() {
         return String.format(
-                "Station Number: %1$8d\nOwner: %2$s\nAddress: %3$s\nAddress:%4$s\nHot Dogs Sold: %5$s\nIncome:%6$#.2f\n", this.id, this.owner, this.address, this.countSold, this.soldPrice, this.income());
+                "Station Number: %1$8d\nOwner: %2$s\nAddress: %3$s\nAddress: %4$s\nHot Dogs Sold: %5$s\nIncome: %6$#.2f\n", this.id, this.owner, this.address, this.countSold, this.soldPrice, this.income());
     }
 }
