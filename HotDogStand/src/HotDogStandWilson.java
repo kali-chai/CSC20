@@ -29,7 +29,6 @@ class HotDogStand {
     /**
      * Static variables. TreeMap used to store all stands.
      */
-    public static TreeMap<Integer, String> allStandOwners = new TreeMap<Integer, String>();
     public static TreeMap<Integer, HotDogStand> allStands = new TreeMap<Integer, HotDogStand>();
     public static int price = 10;
     public static int soldPrice = 12;
@@ -43,6 +42,7 @@ class HotDogStand {
 
     /**
      * Constructor for HotDogStand.
+     * Refuses object creation of given ID is a duplicate.
      * 
      * @param id
      * @param owner
@@ -50,12 +50,18 @@ class HotDogStand {
      */
 
     public HotDogStand(int id, String owner, String address) {
-        this.id = id;
-        this.owner = owner;
-        this.address = address;
-        this.countSold = 0;
-        allStandOwners.put(id, owner);
-        allStands.put(id, this);
+        if (allStands.containsKey(id)) {
+            System.out.println(
+                    "Sorry, I couldn't create that. A HotDogStand object with the same ID already exists. Modify that one or dismantle it first.\n");
+            return;
+        }
+        {
+            this.id = id;
+            this.owner = owner;
+            this.address = address;
+            this.countSold = 0;
+            allStands.put(id, this);
+        }
     }
 
     /**
@@ -81,7 +87,6 @@ class HotDogStand {
 
     public void setOwner(String owner) {
         this.owner = owner;
-        allStandOwners.put(null, owner);
     }
 
     public void order(int count) {
@@ -116,10 +121,10 @@ class HotDogStand {
      * @param owner
      * @return formatted string of all stands owned by given owner.
      */
-    public String search(String owner) {
+    public static String search(String owner) {
         String result = String.format("Hot dog stands owned by %1$s:\n", owner);
-        for (Map.Entry<Integer, String> entry : allStandOwners.entrySet()) {
-            if (entry.getValue().equals(owner)) {
+        for (Map.Entry<Integer, HotDogStand> entry : allStands.entrySet()) {
+            if (entry.getValue().getOwner().equals(owner)) {
                 result += String.format("ID: %1$d\n", entry.getKey());
             }
         }
@@ -138,6 +143,42 @@ class HotDogStand {
             totalProfit += entry.getValue().income() * 0.3;
         }
         return totalProfit;
+    }
+
+    /**
+     * query function. Similar to toString, but returns based on ID passed as
+     * Integer, even without an object reference. Will return an apology (I'll make
+     * it more profuse next time) if the ID does not exist.
+     * 
+     * @param id
+     * @return toString of HotDogStand object with given ID.
+     */
+    public static String query(int id) {
+        if (allStands.containsKey(id)) {
+            return allStands.get(id).toString();
+        }
+        return "Sorry, I couldn't find that. A HotDogStand object with the given ID does not exist. I'm very sorry.\n";
+    }
+
+    /**
+     * dismantle function. Discards HotDogStand object with given ID, removes it
+     * from the TreeMap.
+     * 
+     * @param id
+     */
+    public static void dismantle(int id) {
+        allStands.remove(id);
+    }
+
+    /**
+     * dismantle function overloaded. Discards HotDogStand object passed as
+     * reference, removes it from the TreeMap. Fuctionally checks the HotDogStand's
+     * id variable, calls dismantle with that.
+     * 
+     * @param stand
+     */
+    public static void dismantle(HotDogStand stand) {
+        dismantle(stand.getId());
     }
 }
 
@@ -169,31 +210,40 @@ class YourDriver {
         }
 
         /**
-         * Creates HotDogStand objects with IDs.
+         * Creates HotDogStand objects with IDs. I've opted to forgo any object
+         * declarations outside of the TreeMap, simplifying my calls to referencing key
+         * elements from the TreeMap. In fact, you can run this program without ever
+         * declaring a HotDogStand object with a symbol, using just .put and .get.
          */
-        HotDogStand stand1 = new HotDogStand(n1, "Wilson", "Sonoma");
-        HotDogStand stand2 = new HotDogStand(n2, "Wilson", "Napa");
-        HotDogStand stand3 = new HotDogStand(n3, "Wilson", "Tracy");
+        HotDogStand.allStands.put(n1, new HotDogStand(n1, "Wilson", "Sacramento"));
+        HotDogStand.allStands.put(n2, new HotDogStand(n2, "Wilson", "Napa"));
+        HotDogStand.allStands.put(n3, new HotDogStand(n3, "Wilson", "Tracy"));
 
         /**
          * Orders a random number of hot dogs between 200 and 500 for each stand.
          */
-        stand1.order(rand.nextInt(301) + 200);
-        stand2.order(rand.nextInt(301) + 200);
-        stand3.order(rand.nextInt(301) + 200);
+        HotDogStand.allStands.get(n1).order(rand.nextInt(301) + 200);
+        HotDogStand.allStands.get(n2).order(rand.nextInt(301) + 200);
+        HotDogStand.allStands.get(n3).order(rand.nextInt(301) + 200);
 
         /**
          * Calculates total sold and income.
          */
-        int totalSold = stand1.getCountSold() + stand2.getCountSold() + stand3.getCountSold();
-        double totalIncome = stand1.income() + stand2.income() + stand3.income();
+        int totalSold = 0;
+        for (Map.Entry<Integer, HotDogStand> entry : HotDogStand.allStands.entrySet()) {
+            totalSold += entry.getValue().getCountSold();
+        }
+        double totalIncome = 0;
+        for (Map.Entry<Integer, HotDogStand> entry : HotDogStand.allStands.entrySet()) {
+            totalIncome += entry.getValue().income();
+        }
 
         /**
          * Prints each stand's toString, total sold, and total income.
          */
-        System.out.println(stand1.toString());
-        System.out.println(stand2.toString());
-        System.out.println(stand3.toString());
+        for (Map.Entry<Integer, HotDogStand> entry : HotDogStand.allStands.entrySet()) {
+            System.out.println(entry.getValue().toString());
+        }
         System.out.println(String.format("Total hotdogs sold: %d\n%s", totalSold, "_".repeat(47)));
         System.out.println(String.format("Total income: %.2f\n%s", totalIncome, "_".repeat(47)));
 
@@ -201,8 +251,23 @@ class YourDriver {
          * Searches for all stands owned by Wilson, prints. Finds your profit sa the
          * manager, prints.
          */
-        System.out.println(stand1.search("Wilson"));
+        System.out.println(HotDogStand.search("Wilson"));
         System.out.println(String.format("Your profit: %.2f\n%s", HotDogStand.yourProfit(), "_".repeat(47)));
+
+        /**
+         * Creates three more HotDogStand objects with random unique IDs, uses query and
+         * dismantle.
+         */
+
+        int n4 = rand.nextInt(9999999) + 99999;
+        int n5 = rand.nextInt(9999999) + 99999;
+        int n6 = rand.nextInt(9999999) + 99999;
+        HotDogStand.allStands.put(n4, new HotDogStand(n4, "Shane", "SF"));
+        HotDogStand.allStands.put(n5, new HotDogStand(n5, "Ross", "LA"));
+        HotDogStand.allStands.put(n6, new HotDogStand(n6, "Lowe", "SD"));
+        System.out.println(HotDogStand.query(n4));
+        HotDogStand.dismantle(n5);
+        System.out.println(HotDogStand.query(n5));
 
         System.out.println("Format strings and maps are awesome, why didn't I learn this sooner?");
     }
