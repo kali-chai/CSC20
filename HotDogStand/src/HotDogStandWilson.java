@@ -94,12 +94,12 @@ class HotDogStand {
     }
 
     /**
-     * Special getter. Calculates income based on difference between aquisition and
+     * Special getter. Calculates getIncome based on difference between aquisition and
      * sale, multiplied by count sold.
      * 
-     * @return income
+     * @return getIncome
      */
-    public double income() {
+    public double getIncome() {
         return this.countSold * (soldPrice - price);
     }
 
@@ -112,7 +112,7 @@ class HotDogStand {
     public String toString() {
         return String.format(
                 "Station Number: %08d\nOwner: %s\nAddress: %s\nHot Dogs Sold: %d\nIncome: %.2f\n%s\n",
-                this.id, this.owner, this.address, this.countSold, this.income(), "_".repeat(47));
+                this.id, this.owner, this.address, this.countSold, this.getIncome(), "_".repeat(47));
     }
 
     /**
@@ -140,7 +140,7 @@ class HotDogStand {
     public static double yourProfit() {
         double totalProfit = 0.0;
         for (Map.Entry<Integer, HotDogStand> entry : allStands.entrySet()) {
-            totalProfit += entry.getValue().income() * 0.3;
+            totalProfit += entry.getValue().getIncome() * 0.3;
         }
         return totalProfit;
     }
@@ -189,7 +189,7 @@ class YourDriver {
     /**
      * Creates three HotDogStand objects with random unique IDs, orders a random
      * number of hot dogs between 200 and 500 for each stand, adds total sold, finds
-     * income, and prints.
+     * getIncome, and prints.
      * 
      * @param args
      */
@@ -227,25 +227,25 @@ class YourDriver {
         HotDogStand.allStands.get(n3).order(rand.nextInt(301) + 200);
 
         /**
-         * Calculates total sold and income.
+         * Calculates total sold and getIncome.
          */
         int totalSold = 0;
         for (Map.Entry<Integer, HotDogStand> entry : HotDogStand.allStands.entrySet()) {
             totalSold += entry.getValue().getCountSold();
         }
-        double totalIncome = 0;
+        double totalgetIncome = 0;
         for (Map.Entry<Integer, HotDogStand> entry : HotDogStand.allStands.entrySet()) {
-            totalIncome += entry.getValue().income();
+            totalgetIncome += entry.getValue().getIncome();
         }
 
         /**
-         * Prints each stand's toString, total sold, and total income.
+         * Prints each stand's toString, total sold, and total getIncome.
          */
         for (Map.Entry<Integer, HotDogStand> entry : HotDogStand.allStands.entrySet()) {
             System.out.println(entry.getValue().toString());
         }
         System.out.println(String.format("Total hotdogs sold: %d\n%s", totalSold, "_".repeat(47)));
-        System.out.println(String.format("Total income: %.2f\n%s", totalIncome, "_".repeat(47)));
+        System.out.println(String.format("Total Income: %.2f\n%s", totalgetIncome, "_".repeat(47)));
 
         /**
          * Searches for all stands owned by Wilson, prints. Finds your profit sa the
@@ -290,14 +290,14 @@ class MyDriver {
         stand2.order(150);
         stand3.order(175);
 
-        // claculating the income form the stations
-        double stand1Income = stand1.income();
-        double stand2Income = stand2.income();
-        double stand3Income = stand3.income();
+        // claculating the getIncome form the stations
+        double stand1Income = stand1.getIncome();
+        double stand2Income = stand2.getIncome();
+        double stand3Income = stand3.getIncome();
 
         // getting the total number of the hotdogs orderd at all the stations
         int total = stand1.getCountSold() + stand2.getCountSold() + stand3.getCountSold();
-        double totalIncome = stand1.income() + stand2.income() + stand3.income();
+        double totalIncome = stand1.getIncome() + stand2.getIncome() + stand3.getIncome();
 
         // displaying the info
         System.out.println(stand1);
@@ -308,7 +308,7 @@ class MyDriver {
         System.out.println("________________________________________________");
         System.out.println("Total hotdogs sold at all the stations: " + total);
         System.out.println("________________________________________________");
-        System.out.println("Total income: " + totalIncome);
+        System.out.println("Total Income: " + totalIncome);
 
     }
 }
