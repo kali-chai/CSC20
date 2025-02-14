@@ -1,5 +1,5 @@
 /**
- * Name: Kali Wilson
+ * @author Kali Wilson
  * Description: A demonstration of polymorphism with the Package class and subclasses. Consists of Package and its subclasses, TwoDayPackage and OvernightPackage, which all calculate prices differently. 
  * Testimony: All the code is written by myself and I have not copied the code from any resources. Kali Wilson
  */
