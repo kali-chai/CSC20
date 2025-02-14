@@ -188,6 +188,7 @@ class TwoDayPackage extends Package {
 
     /**
      * Constructor. Same behavior as parent.
+     * 
      * @param destname
      * @param destAddress
      * @param destCity
@@ -202,6 +203,7 @@ class TwoDayPackage extends Package {
 
     /**
      * Overloaded constructor. Same behavior as parent.
+     * 
      * @param sendName
      * @param destName
      * @param sendAddress
@@ -222,6 +224,7 @@ class TwoDayPackage extends Package {
 
     /**
      * Method calculateCost.
+     * 
      * @return parent calculateCost added to flatFee.
      */
     @Override
@@ -252,6 +255,7 @@ class OvernightPackage extends Package {
 
     /**
      * Constructor. Same behavior as parent.
+     * 
      * @param destname
      * @param destAddress
      * @param destCity
@@ -266,6 +270,7 @@ class OvernightPackage extends Package {
 
     /**
      * Overloaded constructor. Same behavior as parent.
+     * 
      * @param sendName
      * @param destName
      * @param sendAddress
@@ -286,6 +291,7 @@ class OvernightPackage extends Package {
 
     /**
      * Method calculateCost.
+     * 
      * @return parent calculateCost plus additional cost based on overnightFee.
      */
     @Override
@@ -324,3 +330,12 @@ class Driver {
         System.out.println(wilson.toString());
     }
 }
+
+/**
+ * Reflection questions:
+ * 1: Don Kelly was declared and initialized as a regular Package, and output
+ * became that of a Package object.
+ * 2: TwoDayShipping's calculateCost() method fails to add the flat rate. Code
+ * was probably not implemented here (e.g, public double calculateCost() {
+ * return super.calculateCost()}).
+ */
