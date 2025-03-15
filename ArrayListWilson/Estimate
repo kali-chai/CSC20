@@ -1,0 +1,13 @@
+     Qty                            Item                    Part                            Meter  USD/month
+       1             B1s Virtual Machine       AAA-68660     f4d7a5a5-1b67-45ea-b1a0-282fbdd34b05       3.42
+                          3-Year Savings
+       1                 E1 Managed Disk       AAF-76270     6a33ed07-4dc0-4bed-b582-5e80f20856da       0.33
+                 4GiB, Standard SSD, LRS
+   10000               Disk Transactions       AAD-26003     ce957933-8287-4f8b-83ee-53a5cbe056d9       0.99
+        in 10000's of transactions/month
+                        price cap at 495
+     100       Internet Egress Bandwidth       Q5H-00003     9995d93a-7d35-4d3f-9c69-7a7fea447ef4       0.00
+                Microsoft Global Network
+                             in GB/month
+       1                      IP Address       T6Z-00010     26ce34b7-67b3-480d-9d1b-54a7fb80f67a       2.68
+                                  Static
