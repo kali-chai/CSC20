@@ -1,4 +1,4 @@
-public class App {
+public class AppLab2 {
 	public static void main(String[] args) throws Exception {
 		System.out.println("Hello, World!");
 		C[] elements = { new A(), new B(), new C(), new D() };

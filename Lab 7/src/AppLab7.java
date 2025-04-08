@@ -1,5 +1,5 @@
 import java.util.*;
-public class App {
+public class AppLab7 {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
         LinkedList<Integer> list = new LinkedList<>();

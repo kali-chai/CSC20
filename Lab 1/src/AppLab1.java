@@ -1,7 +1,7 @@
 /**
  * Stores methods in labs; Contains, findMedian.
  */
-public class App {
+public class AppLab1 {
     public static void main(String[] args) throws Exception {
         System.out.println("Hello, World!");
         Date date = new Date(2, 28);
